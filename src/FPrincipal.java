@@ -1,5 +1,6 @@
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class FPrincipal extends javax.swing.JFrame {
 
@@ -37,7 +38,7 @@ public class FPrincipal extends javax.swing.JFrame {
         BResponsables = new javax.swing.JToggleButton();
         BBitacora = new javax.swing.JToggleButton();
         BNuevo = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        BEditar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TQuery = new javax.swing.JTable();
 
@@ -46,6 +47,7 @@ public class FPrincipal extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         buttonGroup1.add(BInfantes);
+        BInfantes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         BInfantes.setSelected(true);
         BInfantes.setText("INFANTES");
         BInfantes.setFocusable(false);
@@ -59,6 +61,7 @@ public class FPrincipal extends javax.swing.JFrame {
         jToolBar1.add(BInfantes);
 
         buttonGroup1.add(BEducadores);
+        BEducadores.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         BEducadores.setText("EDUCADORES");
         BEducadores.setFocusable(false);
         BEducadores.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -71,6 +74,7 @@ public class FPrincipal extends javax.swing.JFrame {
         jToolBar1.add(BEducadores);
 
         buttonGroup1.add(BResponsables);
+        BResponsables.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         BResponsables.setText("RESPONSABLES");
         BResponsables.setFocusable(false);
         BResponsables.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -83,6 +87,7 @@ public class FPrincipal extends javax.swing.JFrame {
         jToolBar1.add(BResponsables);
 
         buttonGroup1.add(BBitacora);
+        BBitacora.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         BBitacora.setText("BITACORA");
         BBitacora.setFocusable(false);
         BBitacora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -95,6 +100,7 @@ public class FPrincipal extends javax.swing.JFrame {
         jToolBar1.add(BBitacora);
 
         BNuevo.setText("Nuevo");
+        BNuevo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         BNuevo.setFocusable(false);
         BNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         BNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -105,16 +111,17 @@ public class FPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(BNuevo);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 333, Short.MAX_VALUE)
-        );
+        BEditar.setText("Editar");
+        BEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BEditar.setFocusable(false);
+        BEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BEditarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(BEditar);
 
         TQuery.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,22 +140,18 @@ public class FPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1053, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -185,29 +188,69 @@ public class FPrincipal extends javax.swing.JFrame {
             JDInfantes di = new JDInfantes(this, true);
             di.obtenerConexion(cnx);
             di.setVisible(true);
-            
-            
+            cnx.entablar(infante.todos, TQuery);
+
         } else if (BBitacora.isSelected()) {
             JDBitacora di = new JDBitacora(this, true);
             di.obtenerConexion(cnx);
             di.setVisible(true);
-            
-            
+            cnx.entablar(bitacora.todos, TQuery);
+
         } else if (BEducadores.isSelected()) {
             JDEducador di = new JDEducador(this, true);
             di.obtenerConexion(cnx);
             di.setVisible(true);
-            
-            
+            cnx.entablar(educador.todos, TQuery);
+
         } else if (BResponsables.isSelected()) {
             JDResponsable di = new JDResponsable(this, true);
             di.obtenerConexion(cnx);
             di.setVisible(true);
-            
+            cnx.entablar(responsable.todos, TQuery);
 
             //
         }
     }//GEN-LAST:event_BNuevoActionPerformed
+
+    private void BEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BEditarActionPerformed
+        // TODO add your handling code here:
+        if (TQuery.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(this, "Primero selecciona un renglon de la tabla para editar.");
+            return;
+        }
+        if (BInfantes.isSelected()) {
+            JDInfantes di = new JDInfantes(this, true);
+            di.obtenerConexion(cnx);
+            di.obtenerInfante(crearInfante());
+            di.setVisible(true);
+            cnx.entablar(infante.todos, TQuery);
+
+        } else if (BBitacora.isSelected()) {
+            JDBitacora di = new JDBitacora(this, true);
+            di.obtenerConexion(cnx);
+            di.obtenerBitacora(crearBitacora());
+            di.setVisible(true);
+            cnx.entablar(bitacora.todos, TQuery);
+
+        } else if (BEducadores.isSelected()) {
+            JDEducador di = new JDEducador(this, true);
+            di.obtenerConexion(cnx);
+            di.obtenerEducador(crearEducador());
+            di.setVisible(true);
+            cnx.entablar(educador.todos, TQuery);
+
+        } else if (BResponsables.isSelected()) {
+            JDResponsable di = new JDResponsable(this, true);
+            di.obtenerConexion(cnx);
+            di.obtenerResponsable(crearResponsable());
+            di.setVisible(true);
+            cnx.entablar(responsable.todos, TQuery);
+
+            //
+        }
+
+
+    }//GEN-LAST:event_BEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,14 +289,87 @@ public class FPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton BBitacora;
+    private javax.swing.JButton BEditar;
     private javax.swing.JToggleButton BEducadores;
     private javax.swing.JToggleButton BInfantes;
     private javax.swing.JButton BNuevo;
     private javax.swing.JToggleButton BResponsables;
     private javax.swing.JTable TQuery;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
+
+    public infante crearInfante() {
+        DefaultTableModel modelo = (DefaultTableModel) TQuery.getModel();
+        int ren = TQuery.getSelectedRow();
+        infante kid = new infante();
+        if (ren >= 0) {
+            kid.curp = modelo.getValueAt(ren, 0).toString();
+            kid.nombre = modelo.getValueAt(ren, 1).toString();
+            kid.sexo = modelo.getValueAt(ren, 2).toString();
+            kid.fecha = modelo.getValueAt(ren, 3).toString();
+            kid.estado = modelo.getValueAt(ren, 4).toString();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona un renglon de la tabla.");
+        }
+        return kid;
+    }
+
+    public responsable crearResponsable() {
+        DefaultTableModel modelo = (DefaultTableModel) TQuery.getModel();
+        int ren = TQuery.getSelectedRow();
+        responsable res = new responsable();
+        if (ren >= 0) {
+            res.curp = modelo.getValueAt(ren, 0).toString();
+            res.nombre = modelo.getValueAt(ren, 1).toString();
+            res.sexo = modelo.getValueAt(ren, 2).toString();
+            res.telefono = modelo.getValueAt(ren, 3).toString();
+            res.parentesco = modelo.getValueAt(ren, 4).toString();
+            res.estado = modelo.getValueAt(ren, 5).toString();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona un renglon de la tabla.");
+        }
+        return res;
+    }
+
+    public educador crearEducador() {
+        DefaultTableModel modelo = (DefaultTableModel) TQuery.getModel();
+        int ren = TQuery.getSelectedRow();
+        educador edu = new educador();
+        if (ren >= 0) {
+            edu.curp = modelo.getValueAt(ren, 0).toString();
+            edu.nombre = modelo.getValueAt(ren, 1).toString();
+            edu.sexo = modelo.getValueAt(ren, 2).toString();
+            edu.telefono = modelo.getValueAt(ren, 3).toString();
+            edu.direccion = modelo.getValueAt(ren, 3).toString();
+            edu.estado = modelo.getValueAt(ren, 4).toString();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona un renglon de la tabla.");
+        }
+        return edu;
+    }
+    
+    public bitacora crearBitacora() {
+        DefaultTableModel modelo = (DefaultTableModel) TQuery.getModel();
+        int ren = TQuery.getSelectedRow();
+        bitacora bit = new bitacora();
+        if (ren >= 0) {
+            bit.folio = modelo.getValueAt(ren, 0).toString();
+            bit.tiempo = modelo.getValueAt(ren, 1).toString();
+            bit.tipo = modelo.getValueAt(ren, 2).toString();
+            bit.observaciones = modelo.getValueAt(ren, 3).toString();
+            bit.infantes = modelo.getValueAt(ren, 3).toString();
+            bit.responsables = modelo.getValueAt(ren, 4).toString();
+            bit.educadores = modelo.getValueAt(ren, 4).toString();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona un renglon de la tabla.");
+        }
+        return bit;
+    }
+    
+    
+
 }
+
+

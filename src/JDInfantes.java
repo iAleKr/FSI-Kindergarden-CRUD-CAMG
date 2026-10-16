@@ -1,6 +1,9 @@
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -27,6 +30,24 @@ public class JDInfantes extends javax.swing.JDialog {
     public void obtenerConexion(Conexion cnx){
         this.cnx = cnx;
     }
+    
+    public void obtenerInfante(infante kid){
+        
+       
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MMdd");
+            
+            txtCurp.setText(kid.curp);
+            txtNombre.setText(kid.nombre);
+            cbSexo.setSelectedItem(kid.sexo);
+            SFechaNacimiento.setValue(format.parse(kid.fecha));
+            CBEstado.setSelectedItem(kid.estado);
+        } catch (ParseException ex) {
+            Logger.getLogger(JDInfantes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,10 +69,10 @@ public class JDInfantes extends javax.swing.JDialog {
         SFechaNacimiento = new javax.swing.JSpinner();
         CBEstado = new javax.swing.JComboBox<>();
         BRegistrar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BActualizar = new javax.swing.JButton();
+        BCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        BBorrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -78,16 +99,31 @@ public class JDInfantes extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Actualizar");
+        BActualizar.setText("Actualizar");
+        BActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BActualizarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Cancelar");
+        BCancelar.setText("Cancelar");
+        BCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(204, 0, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("DATOS DEL INFANTE");
 
-        jButton4.setText("Borrar");
+        BBorrar.setText("Borrar");
+        BBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BBorrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,11 +135,11 @@ public class JDInfantes extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BRegistrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(BActualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)
+                        .addComponent(BBorrar)
                         .addGap(12, 12, 12)
-                        .addComponent(jButton3))
+                        .addComponent(BCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -150,9 +186,9 @@ public class JDInfantes extends javax.swing.JDialog {
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BRegistrar)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(BActualizar)
+                    .addComponent(BCancelar)
+                    .addComponent(BBorrar))
                 .addGap(38, 38, 38))
         );
 
@@ -161,8 +197,6 @@ public class JDInfantes extends javax.swing.JDialog {
 
     private void BRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BRegistrarActionPerformed
         
-        
-        //
         SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
         infante kid = new infante(
                 txtCurp.getText(),
@@ -172,7 +206,6 @@ public class JDInfantes extends javax.swing.JDialog {
                 CBEstado.getSelectedItem().toString()    
         );
         
-        //
         
         if (kid.insertar(cnx.con)==1) {
             JOptionPane.showMessageDialog(this, "Infante registrado. ");
@@ -184,6 +217,58 @@ public class JDInfantes extends javax.swing.JDialog {
         
         
     }//GEN-LAST:event_BRegistrarActionPerformed
+
+    private void BActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BActualizarActionPerformed
+        
+        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+        infante kid = new infante(
+                txtCurp.getText(),
+                txtNombre.getText(),
+                cbSexo.getSelectedItem().toString(),
+                s.format((Date)SFechaNacimiento.getValue()),
+                CBEstado.getSelectedItem().toString()    
+        );
+        
+        
+        if (kid.actualizar(cnx.con)==1) {
+            JOptionPane.showMessageDialog(this, "Infante actualizado. ");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo registrar el Infante. ");
+        }
+        
+    }//GEN-LAST:event_BActualizarActionPerformed
+
+    private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed
+        // TODO add your handling code here:
+        
+        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+        infante kid = new infante(
+                txtCurp.getText(),
+                txtNombre.getText(),
+                cbSexo.getSelectedItem().toString(),
+                s.format((Date)SFechaNacimiento.getValue()),
+                CBEstado.getSelectedItem().toString()    
+        );
+        
+        
+        if (kid.borrar(cnx.con)==1) {
+            JOptionPane.showMessageDialog(this, "Datos del infante eliminado. ");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo elimianr el Infante. ");
+        }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_BBorrarActionPerformed
+
+    private void BCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_BCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,13 +313,13 @@ public class JDInfantes extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BActualizar;
+    private javax.swing.JButton BBorrar;
+    private javax.swing.JButton BCancelar;
     private javax.swing.JButton BRegistrar;
     private javax.swing.JComboBox<String> CBEstado;
     private javax.swing.JSpinner SFechaNacimiento;
     private javax.swing.JComboBox<String> cbSexo;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

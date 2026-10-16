@@ -23,6 +23,15 @@ public class JDResponsable extends javax.swing.JDialog {
     public void obtenerConexion(Conexion cnx){
         this.cnx = cnx;
     }
+    
+    public void obtenerResponsable(responsable res){    
+            txtCurp.setText(res.curp);
+            txtNombre.setText(res.nombre);
+            CBSexo.setSelectedItem(res.sexo);
+            txtTelefono.setText(res.telefono);
+            txtParentesco.setText(res.parentesco);
+            CBEstado.setSelectedItem(res.estado);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,31 +42,41 @@ public class JDResponsable extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
+        BActualizar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        BCancelar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtParentesco = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        BBorrar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtCurp = new javax.swing.JTextField();
         CBEstado = new javax.swing.JComboBox<>();
         txtNombre = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        BRegistrar = new javax.swing.JButton();
         txtTelefono = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         CBSexo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton2.setText("Actualizar");
+        BActualizar.setText("Actualizar");
+        BActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BActualizarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("NOMBRE:");
 
-        jButton3.setText("Cancelar");
+        BCancelar.setText("Cancelar");
+        BCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("SEXO:");
 
@@ -68,7 +87,12 @@ public class JDResponsable extends javax.swing.JDialog {
 
         jLabel7.setText("Telefono:");
 
-        jButton4.setText("Borrar");
+        BBorrar.setText("Borrar");
+        BBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BBorrarActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Parentesco:");
 
@@ -76,10 +100,10 @@ public class JDResponsable extends javax.swing.JDialog {
 
         CBEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
 
-        jButton1.setText("Registrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BRegistrar.setText("Registrar");
+        BRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BRegistrarActionPerformed(evt);
             }
         });
 
@@ -101,13 +125,13 @@ public class JDResponsable extends javax.swing.JDialog {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(BRegistrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(BActualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)
+                        .addComponent(BBorrar)
                         .addGap(12, 12, 12)
-                        .addComponent(jButton3))
+                        .addComponent(BCancelar))
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,10 +187,10 @@ public class JDResponsable extends javax.swing.JDialog {
                     .addComponent(CBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(BRegistrar)
+                    .addComponent(BActualizar)
+                    .addComponent(BCancelar)
+                    .addComponent(BBorrar))
                 .addGap(38, 38, 38))
         );
 
@@ -182,7 +206,7 @@ public class JDResponsable extends javax.swing.JDialog {
         
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BRegistrarActionPerformed
         // TODO add your handling code here:
         
         //
@@ -212,7 +236,61 @@ public class JDResponsable extends javax.swing.JDialog {
         
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BRegistrarActionPerformed
+
+    private void BActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BActualizarActionPerformed
+        // TODO add your handling code here:
+        
+        responsable res = new responsable(
+                txtCurp.getText(),
+                txtNombre.getText(),
+                CBSexo.getSelectedItem().toString(),
+                txtTelefono.getText(),
+                txtParentesco.getText(),
+                CBEstado.getSelectedItem().toString()
+                
+                
+        );
+        
+        
+        if (res.actualizar(cnx.con)==1) {
+            JOptionPane.showMessageDialog(this, "Responsable actualizado. ");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo registrar el Educador ");
+        }
+        
+        
+    }//GEN-LAST:event_BActualizarActionPerformed
+
+    private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed
+        // TODO add your handling code here:
+        
+         responsable res = new responsable(
+                txtCurp.getText(),
+                txtNombre.getText(),
+                CBSexo.getSelectedItem().toString(),
+                txtTelefono.getText(),
+                txtParentesco.getText(),
+                CBEstado.getSelectedItem().toString()
+                
+                
+        );
+        
+        
+        if (res.borrar(cnx.con)==1) {
+            JOptionPane.showMessageDialog(this, "Datos del educador eliminados. ");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo eliminar el Educador ");
+        }
+        
+    }//GEN-LAST:event_BBorrarActionPerformed
+
+    private void BCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_BCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,12 +335,12 @@ public class JDResponsable extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BActualizar;
+    private javax.swing.JButton BBorrar;
+    private javax.swing.JButton BCancelar;
+    private javax.swing.JButton BRegistrar;
     private javax.swing.JComboBox<String> CBEstado;
     private javax.swing.JComboBox<String> CBSexo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

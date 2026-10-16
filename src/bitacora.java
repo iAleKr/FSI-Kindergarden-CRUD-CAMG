@@ -26,8 +26,13 @@ public class bitacora {
         this.educadores = educadores;
     }
 
-    bitacora(String text, String format, String toString, String text0, String toString0, String toString1, String toString2, String toString3) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   
+    bitacora() {
+        
+    }
+
+    bitacora(Object object, String text, String toString, String text0, String toString0, String toString1, String toString2, String toString3) {
+        
     }
     
     public int insertar(Connection con){
@@ -68,15 +73,15 @@ public class bitacora {
     public int actualizar(Connection con){
       int resultado = 0;
         try {
-            String sql = "UPDATE bitacora SET tiempo = ?, tipo = ?, observaciones = ?, infantes_curp = ?, responsables_curp = ?, educadores_curp = ? WHERE folio = ?";
+            String sql = "UPDATE bitacora SET tiempo = ?, tipo = ?, observaciones = ?, infantes_curp = ?, responsables_curpr = ?, educadores_curpe = ? WHERE folio = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, folio);
-            ps.setString(2, tiempo);
-            ps.setString(3, tipo);
-            ps.setString(4, observaciones);
-            ps.setString(5, infantes);
-            ps.setString(6, responsables);
-            ps.setString(7, educadores);
+            ps.setString(1, tiempo);
+            ps.setString(2, tipo);
+            ps.setString(3, observaciones);
+            ps.setString(4, infantes);
+            ps.setString(5, responsables);
+            ps.setString(6, educadores);
+            ps.setString(7, folio); // El folio va al final por ser la condición WHERE
             return ps.executeUpdate();
             
             

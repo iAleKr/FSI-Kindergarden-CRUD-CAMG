@@ -25,6 +25,11 @@ public class responsable {
         this.estado = estado;
     }
 
+    responsable() {
+        
+    }
+
+
     public int insertar(Connection con){
         int resultado = 0;
         try {
@@ -62,12 +67,12 @@ public class responsable {
     public int actualizar(Connection con){
       int resultado = 0;
         try {
-            String sql = "UPDATE responsables SET nombrer = ?, sexor = ?, telefono = ?, parenteso = ?, estador = ? WHERE curpr = ?";
+            String sql = "UPDATE responsables SET nombrer = ?, sexor = ?, telefono = ?, parentesco = ?, estador = ? WHERE curpr = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nombre);
             ps.setString(2, sexo);
             ps.setString(3, telefono);
-            ps.setString(5, parentesco);
+            ps.setString(4, parentesco);
             ps.setString(5, estado);
             ps.setString(6, curp);
             return ps.executeUpdate();

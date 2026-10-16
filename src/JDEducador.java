@@ -26,6 +26,15 @@ public class JDEducador extends javax.swing.JDialog {
         
     }
     
+    public void obtenerEducador(educador edu){
+            txtCurp.setText(edu.curp);
+            txtNombre.setText(edu.nombre);
+            CBSexo.setSelectedItem(edu.sexo);
+            txtTelefono.setText(edu.telefono);
+            txtDireccion.setText(edu.direccion);
+            CBEstado.setSelectedItem(edu.estado);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,10 +76,20 @@ public class JDEducador extends javax.swing.JDialog {
         jLabel1.setText("CURP:");
 
         BActualizar.setText("Actualizar");
+        BActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BActualizarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("NOMBRE:");
 
         BCancelar.setText("Cancelar");
+        BCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("SEXO:");
 
@@ -80,6 +99,11 @@ public class JDEducador extends javax.swing.JDialog {
         jLabel6.setText("DATOS DEL EDUCADOR");
 
         BBorrar.setText("Borrar");
+        BBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BBorrarActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("ESTADO:");
 
@@ -206,6 +230,56 @@ public class JDEducador extends javax.swing.JDialog {
         
         
     }//GEN-LAST:event_BRegistrarActionPerformed
+
+    private void BActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BActualizarActionPerformed
+        // TODO add your handling code here:
+        
+        educador edu = new educador(
+                txtCurp.getText(),
+                txtNombre.getText(),
+                CBSexo.getSelectedItem().toString(),
+                txtTelefono.getText(),
+                txtDireccion.getText(),
+                CBEstado.getSelectedItem().toString()
+                       
+        );
+        
+        //
+        
+        if (edu.actualizar(cnx.con)==1) {
+            JOptionPane.showMessageDialog(this, "Educador actualizado. ");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al actualizar el educador");
+        }
+    }//GEN-LAST:event_BActualizarActionPerformed
+
+    private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed
+        // TODO add your handling code here:
+         educador edu = new educador(
+                txtCurp.getText(),
+                txtNombre.getText(),
+                CBSexo.getSelectedItem().toString(),
+                txtTelefono.getText(),
+                txtDireccion.getText(),
+                CBEstado.getSelectedItem().toString()
+                       
+        );
+        
+        //
+        
+        if (edu.borrar(cnx.con)==1) {
+            JOptionPane.showMessageDialog(this, "Educador eliminado. ");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al eliminar al educador");
+        }
+    }//GEN-LAST:event_BBorrarActionPerformed
+
+    private void BCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_BCancelarActionPerformed
 
     /**
      * @param args the command line arguments

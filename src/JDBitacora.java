@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-
 /**
  *
  * @author ialek
@@ -15,20 +14,30 @@ import javax.swing.JOptionPane;
 public class JDBitacora extends javax.swing.JDialog {
 
     private Conexion cnx;
-    
+
     public JDBitacora(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(this);
     }
-    
-    public void obtenerConexion(Conexion cnx){
+
+    public void obtenerConexion(Conexion cnx) {
         this.cnx = cnx;
         cnx.seleccionar(infante.curps, CBInfante);
         cnx.seleccionar(educador.curps, CBEducador);
         cnx.seleccionar(responsable.curps, CBResponsable);
     }
-    
+
+    public void obtenerBitacora(bitacora bit) {
+
+        LFolio.setText(bit.folio);
+        LFecha.setText(bit.tiempo);
+        CBTipo.setSelectedItem(bit.tipo);
+        TAObservaciones.setText(bit.observaciones);
+        CBInfante.setSelectedItem(bit.infantes);
+        CBResponsable.setSelectedItem(bit.responsables);
+        CBEducador.setSelectedItem(bit.educadores);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,15 +49,15 @@ public class JDBitacora extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        BRegistrar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        BActualizar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        BCancelar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        BBorrar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         CBTipo = new javax.swing.JComboBox<>();
@@ -65,20 +74,30 @@ public class JDBitacora extends javax.swing.JDialog {
 
         jLabel1.setText("FOLIO:");
 
-        jButton1.setText("Registrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BRegistrar.setText("Registrar");
+        BRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BRegistrarActionPerformed(evt);
             }
         });
 
         jLabel2.setText("FECHA:");
 
-        jButton2.setText("Actualizar");
+        BActualizar.setText("Actualizar");
+        BActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BActualizarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("TIPO:");
 
-        jButton3.setText("Cancelar");
+        BCancelar.setText("Cancelar");
+        BCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("OBSERVACIONES:");
 
@@ -89,7 +108,12 @@ public class JDBitacora extends javax.swing.JDialog {
 
         jLabel5.setText("INFANTE:");
 
-        jButton4.setText("Borrar");
+        BBorrar.setText("Borrar");
+        BBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BBorrarActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("RESPONSABLE:");
 
@@ -159,13 +183,13 @@ public class JDBitacora extends javax.swing.JDialog {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(BRegistrar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)
+                                .addComponent(BActualizar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton4)
+                                .addComponent(BBorrar)
                                 .addGap(12, 12, 12)
-                                .addComponent(jButton3)))
+                                .addComponent(BCancelar)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -205,54 +229,104 @@ public class JDBitacora extends javax.swing.JDialog {
                     .addComponent(CBEducador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(BRegistrar)
+                    .addComponent(BActualizar)
+                    .addComponent(BCancelar)
+                    .addComponent(BBorrar))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BRegistrarActionPerformed
         // TODO add your handling code here:
-        
-        
-        //
+
         SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
         bitacora bit = new bitacora(
                 null,
                 LFecha.getText(),
                 CBTipo.getSelectedItem().toString(),
                 TAObservaciones.getText(),
-                CBTipo.getSelectedItem().toString(),    
-                CBInfante.getSelectedItem().toString(),    
+                CBTipo.getSelectedItem().toString(),
+                CBInfante.getSelectedItem().toString(),
                 CBEducador.getSelectedItem().toString(),
                 CBResponsable.getSelectedItem().toString()
         );
-        
+
         //
-        
-        if (bit.insertar(cnx.con)==1) {
+        if (bit.insertar(cnx.con) == 1) {
             JOptionPane.showMessageDialog(this, "Infante registrado. ");
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "No se pudo registrar el Infante. ");
+            JOptionPane.showMessageDialog(this, "No se pudo borrar el Infante. ");
         }
-        
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+
+    }//GEN-LAST:event_BRegistrarActionPerformed
 
     private void BHoyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BHoyActionPerformed
         // TODO add your handling code here:
-        
+
         SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         LFecha.setText(s.format(new Date()));
-        
-        
+
+
     }//GEN-LAST:event_BHoyActionPerformed
+
+    private void BActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BActualizarActionPerformed
+        // TODO add your handling code here:
+
+        // 1. Instanciamos con los campos correctos y la CURP en su posición
+                bitacora bit = new bitacora(
+                LFolio.getText(), // Folio actual de la bitácora
+                LFecha.getText(), // Fecha / Tiempo
+                CBTipo.getSelectedItem().toString(), // Tipo (Entrada / Salida)
+                TAObservaciones.getText(), // Observaciones
+                CBInfante.getSelectedItem().toString(), // infantes_curp
+                CBResponsable.getSelectedItem().toString(), // responsables_curpr ("RES200000000000001")
+                CBEducador.getSelectedItem().toString() // educadores_curpe
+        );
+
+        // 2. Ejecutamos la actualización
+        if (bit.actualizar(cnx.con) == 1) {
+            JOptionPane.showMessageDialog(this, "Bitácora actualizada correctamente.");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo actualizar la Bitácora.");
+        }
+
+
+    }//GEN-LAST:event_BActualizarActionPerformed
+
+    private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed
+        // TODO add your handling code here:
+
+        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+        bitacora bit = new bitacora(
+                null,
+                LFecha.getText(),
+                CBTipo.getSelectedItem().toString(),
+                TAObservaciones.getText(),
+                CBTipo.getSelectedItem().toString(),
+                CBInfante.getSelectedItem().toString(),
+                CBEducador.getSelectedItem().toString(),
+                CBResponsable.getSelectedItem().toString()
+        );
+
+        //
+        if (bit.borrar(cnx.con) == 1) {
+            JOptionPane.showMessageDialog(this, "Bitacora eliminada correctamente. ");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo borrar la Bitacora. ");
+        }
+    }//GEN-LAST:event_BBorrarActionPerformed
+
+    private void BCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_BCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,7 +371,11 @@ public class JDBitacora extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BActualizar;
+    private javax.swing.JButton BBorrar;
+    private javax.swing.JButton BCancelar;
     private javax.swing.JButton BHoy;
+    private javax.swing.JButton BRegistrar;
     private javax.swing.JComboBox<String> CBEducador;
     private javax.swing.JComboBox<String> CBInfante;
     private javax.swing.JComboBox<String> CBResponsable;
@@ -305,10 +383,6 @@ public class JDBitacora extends javax.swing.JDialog {
     private javax.swing.JLabel LFecha;
     private javax.swing.JLabel LFolio;
     private javax.swing.JTextArea TAObservaciones;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
